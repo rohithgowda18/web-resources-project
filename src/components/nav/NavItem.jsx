@@ -7,25 +7,15 @@ import * as BiIcons from "react-icons/bi";
 import NavUI from './NavUI'
 import {useLocation} from "react-router-dom";
 
-
-  { icon: <BiIcons.BiCodeAlt />, iconName: "Editors", navlink: "Editors" },
-  { icon: <FaIcons.FaStar />, iconName: "Favorites", navlink: "/Favorites" },
-  
-  {
-    icon: <FaIcons.FaHome />,
-    iconName: "Home",
-    navlink: "/",
-  },
-  {
-    icon: <BsIcons.BsFillCameraVideoFill />,
-    iconName: "Videos",
-    navlink: "Videos",
-  },
-  { icon: <BsIcons.BsGlobe2 />, iconName: "Websites", navlink: "Websites" },
-  { icon: <GiIcons.GiBookshelf />, iconName: "Books", navlink: "Books" },
-  { icon: <BsIcons.BsTools />, iconName: "Tools", navlink: "Tools" },
-  { icon: <BiIcons.BiBullseye />, iconName: "Challenges", navlink: "challenges" },
-  { icon: <BiIcons.BiCodeAlt />, iconName: "Editors", navlink: "editor" },
+const icons = [
+  { icon: FaIcons.FaHome, iconName: "Home", navlink: "/" },
+  { icon: BsIcons.BsFillCameraVideoFill, iconName: "Videos", navlink: "/Videos" },
+  { icon: BsIcons.BsGlobe2, iconName: "Websites", navlink: "/Websites" },
+  { icon: GiIcons.GiBookshelf, iconName: "Books", navlink: "/Books" },
+  { icon: BsIcons.BsTools, iconName: "Tools", navlink: "/Tools" },
+  { icon: BiIcons.BiBullseye, iconName: "Challenges", navlink: "/Challenges" },
+  { icon: BiIcons.BiCodeAlt, iconName: "Editors", navlink: "/Editors" },
+  { icon: FaIcons.FaStar, iconName: "Favorites", navlink: "/Favorites" },
 ];
 
 function NavItem({searchResult}) {
@@ -33,19 +23,22 @@ function NavItem({searchResult}) {
 
   return(
     <div className="overflow-hidden h-screen ">
-      { icons.map((item, index) => (
-    <NavUI
-      key={index}
-      // Index shouldn't be used as key
-      icon={item.icon}
-      iconName={item.iconName}
-      navlink={item.navlink}
-      searchResult = {searchResult}
-      activeTab={
-        location.pathname == `/${item.iconName}` ? "bg-[#444a4f]" : ""
-      }
-    />
-  ))}
+      { icons.map((item, index) => {
+        const Icon = item.icon;
+        return (
+          <NavUI
+            key={index}
+            // Index shouldn't be used as key
+            icon={<Icon />}
+            iconName={item.iconName}
+            navlink={item.navlink}
+            searchResult = {searchResult}
+            activeTab={
+              location.pathname == `/${item.iconName}` ? "bg-[#444a4f]" : ""
+            }
+          />
+        )
+      })}
       
     </div>
   )
